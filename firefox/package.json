@@ -1,0 +1,16 @@
+{
+  "title": "贴吧监视器",
+  "name": "tieba",
+  "version": "0.0.1",
+  "description": "监视百度贴吧上的发帖，识别伸手党并删除帖子",
+  "main": "index.js",
+  "author": "yangwang",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "jetpack"
+  ]
+}
