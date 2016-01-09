@@ -1,5 +1,6 @@
 var buttons = require("sdk/ui/button/toggle");
-
+var self = require("sdk/self");
+require("sdk/tabs").on("ready",handleOpen);
 var tabs = require("sdk/tabs");
 
 var MonitorStatus = false;
@@ -25,4 +26,24 @@ function handleClick(status)
 
 	MonitorStatus = !MonitorStatus;
 	
+}
+
+
+function handleOpen(tab)
+{
+	console.log(tab.url);
+	if(tab.url == "http://tieba.baidu.com/")
+	{
+		button.state("window",{
+		"label":"监视已开启",
+		"icon":"./tieba_enable.png"
+	})
+
+
+		tab.attach({
+	contentScriptFile:self.data.url('monitor.js')
+    //contentScript: "if (document.body) document.body.style.border = '5px solid red';"
+  });
+	}
+
 }
