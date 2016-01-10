@@ -1,2 +1,4 @@
-#贴吧监视器
-监视百度贴吧上的发帖，识别伸手党并删除帖子
+﻿#Firefox版
+使用Firefox Add-on SDK开发
+打包需要使用基于nodejs的jpm工具
+安装jpm请参考 https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/jpm#Installation
