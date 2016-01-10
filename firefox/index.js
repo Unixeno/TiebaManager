@@ -48,7 +48,7 @@ function handleOpen(tab)
 	//button.state("tab",{		"label":"监视已开启",		"icon":"./tieba_enable.png"	});
 		//handleClick();
 		tab.attach({contentScriptFile:[self.data.url('jquery.js'),self.data.url('monitor.js')]
-    contentScript: "if (document.body) document.body.style.border = '5px solid red';"
+    //contentScript: "if (document.body) document.body.style.border = '5px solid red';"
   });
 	}
 
