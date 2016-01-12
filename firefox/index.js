@@ -3,7 +3,7 @@ var self = require("sdk/self");
 var tabs = require("sdk/tabs");
 var panels = require("sdk/panel");
 
-tabs.on("ready",handleOpen);
+tabs.on("ready",handleOpen);		//处理tab开启事件
 
 
 
@@ -11,7 +11,8 @@ var MonitorStatus = false;
 
 
 
-var panel = panels.Panel({
+var menuPanel = panels.Panel({
+	onMessage:handleMenu,
   contentURL: self.data.url("menu.html"),
   onHide: handleHide
 });
@@ -22,7 +23,7 @@ var button = buttons.ToggleButton({
 	id : "status-switch",
 	label:"监视已关闭",
 	icon:"./tieba_disable.png",
-	onClick:handleClick,
+	//onClick:handleClick,
 	onChange:handleChange
 });
 
@@ -32,7 +33,7 @@ var button = buttons.ToggleButton({
 function handleChange(state)
 {
 if (state.checked) {
-    panel.show({width: 180,
+    menuPanel.show({width: 100,
       position: button
     });
   }
@@ -42,8 +43,7 @@ function handleHide() {
   button.state('window', {checked: false});
 }
 
-
-function handleClick(status)
+function toggleStatus()
 {
 	if(MonitorStatus == false)
 	{
@@ -63,8 +63,8 @@ function handleClick(status)
 	}
 
 	MonitorStatus = !MonitorStatus;
-	
 }
+
 
 
 
@@ -80,4 +80,15 @@ function handleOpen(tab)
   });
 	}
 
+}
+
+
+
+function handleMenu(contentScriptMessage)
+{
+	console,log('hi');
+	if(contentScriptMessage == "switch")
+	{
+		toggleStatus();
+	}
 }

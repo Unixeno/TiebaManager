@@ -1,11 +1,61 @@
 <html>
+<head>
+	<meta charset="UTF-8">
+
+<script type="text/javascript">
+	function sendMessage()
+	{
+		alert('hi');
+		self.postMessage("switch");
+	}
+</script>
+
+
+
+	<style type="text/css">
+body{
+	background-color: #FFFFF0
+}
+
+	table tbody tr:nth-child(odd){
+background-color: #FFE4C4
+} 
+
+table tbody tr{
+height:24px;
+line-height:24px;
+text-align:center;
+background: #FFF5EE;
+vertical-align:middle;
+font-weight: bold;
+color:#4D4D4D;
+} 
+
+table tbody tr:hover{
+background-color: #CCCCCC;
+color: #FFF
+} 
+	</style>
+</head>
 <body>
-	<dl>
-		<dt>切换状态</dt>
-		<dt>设置</dt>
-		<dt>帮助</dt>
-		<dt>关于</dt>	
-	</dl>
+<table>
+  <tr>
+    <td><img src="./switch.png"></td>
+    <td width="72px" onclick="sendMessage()">切换</td>
+  </tr>
+  <tr>
+    <td><img src="./setting.png"></td>
+    <td >设置</td>
+  </tr>
+  <tr>
+  	<td><img src="./help.png"></td>
+  	<td>帮助</td>
+  </tr>
+  <tr>
+  	<td><img src="./about.png"></td>
+  	<td>关于</td>
+  </tr>
+</table>
 
 </body>
 
