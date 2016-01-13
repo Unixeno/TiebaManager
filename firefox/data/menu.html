@@ -5,8 +5,8 @@
 <script type="text/javascript">
 	function sendMessage()
 	{
-		alert('hi');
-		self.postMessage("switch");
+		//self.postMessage("switch");
+		//alert('hi');
 	}
 </script>
 
@@ -38,22 +38,22 @@ color: #FFF
 	</style>
 </head>
 <body>
-<table>
+<table name='tab'>
   <tr>
     <td><img src="./switch.png"></td>
-    <td width="72px" onclick="sendMessage()">切换</td>
+    <td width="72px" id='switch'>切换</td>
   </tr>
   <tr>
     <td><img src="./setting.png"></td>
-    <td >设置</td>
+    <td name='ha' id='setting'>设置</td>
   </tr>
   <tr>
   	<td><img src="./help.png"></td>
-  	<td>帮助</td>
+  	<td id="help">帮助</td>
   </tr>
   <tr>
   	<td><img src="./about.png"></td>
-  	<td>关于</td>
+  	<td id="about">关于</td>
   </tr>
 </table>
 

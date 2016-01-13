@@ -12,7 +12,7 @@ var MonitorStatus = false;
 
 
 var menuPanel = panels.Panel({
-	onMessage:handleMenu,
+	contentScriptFile:"./menu.js",
   contentURL: self.data.url("menu.html"),
   onHide: handleHide
 });
@@ -28,7 +28,9 @@ var button = buttons.ToggleButton({
 });
 
 
-
+menuPanel.port.on('click-link',function(url){
+	console.log(url);
+})
 
 function handleChange(state)
 {
@@ -86,7 +88,7 @@ function handleOpen(tab)
 
 function handleMenu(contentScriptMessage)
 {
-	console,log('hi');
+	console.log('hi');
 	if(contentScriptMessage == "switch")
 	{
 		toggleStatus();
