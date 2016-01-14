@@ -28,8 +28,21 @@ var button = buttons.ToggleButton({
 });
 
 
-menuPanel.port.on('click-link',function(url){
-	console.log(url);
+menuPanel.port.on('menuEvent',function(menuMessage){
+	console.log(menuMessage);
+		if(menuMessage == "switch")
+	{
+		toggleStatus();
+	}
+	else if (menuMessage == "setting") {
+		console.log('open setting!');
+	}
+	else if (menuMessage == "about") {
+		console.log('open about');
+	}
+	else if(menuMessage == "help"){
+		console.log('open help');
+	}
 })
 
 function handleChange(state)
@@ -78,19 +91,6 @@ function handleOpen(tab)
 	if(tab.url == "http://tieba.baidu.com/")
 	{
 		tab.attach({contentScriptFile:[self.data.url('jquery.js'),self.data.url('monitor.js')]
-    //contentScript: "if (document.body) document.body.style.border = '5px solid red';"
   });
-	}
-
-}
-
-
-
-function handleMenu(contentScriptMessage)
-{
-	console.log('hi');
-	if(contentScriptMessage == "switch")
-	{
-		toggleStatus();
 	}
 }

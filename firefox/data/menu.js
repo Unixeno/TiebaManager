@@ -8,8 +8,11 @@ document.getElementById('setting').addEventListener('click',function(event){
 
 document.getElementById('help').addEventListener('click',function(event){
 	self.port.emit('menuEvent', "help");
+alert('hello');
 }, false);
 
 document.getElementById('about').addEventListener('click',function(event){
-	self.port.emit('menuEvent', "about");
+	
+	window.open('./about.html', 'newwindow', 'height=350, width=600, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no');
+	//self.port.emit('menuEvent', "about");
 }, false);
