@@ -5,8 +5,6 @@ var panels = require("sdk/panel");
 
 tabs.on("ready",handleOpen);		//处理tab开启事件
 
-
-
 var MonitorStatus = false;
 
 
@@ -29,16 +27,16 @@ var button = buttons.ToggleButton({
 
 
 menuPanel.port.on('menuEvent',function(menuMessage){
-	console.log(menuMessage);
-		if(menuMessage == "switch")
+	//console.log(menuMessage);
+	if(menuMessage == "switch")
 	{
+		
+		MonitorStatus = !MonitorStatus;
 		toggleStatus();
+		console.log("status changed");
 	}
 	else if (menuMessage == "setting") {
 		console.log('open setting!');
-	}
-	else if (menuMessage == "about") {
-		console.log('open about');
 	}
 	else if(menuMessage == "help"){
 		console.log('open help');
@@ -55,15 +53,18 @@ if (state.checked) {
 }
 
 function handleHide() {
-  button.state('window', {checked: false});
+  //button.state('window', {checked: false});
+  toggleStatus();
 }
 
 function toggleStatus()
 {
-	if(MonitorStatus == false)
+	console.log('当前状态为：'+MonitorStatus);
+	if(MonitorStatus)
 	{
-
+		console.log('开启监视');
 		button.state("window",{
+			checked:false,
 		"label":"监视已开启\n将自动监视页面！",
 		"icon":"./tieba_enable.png"
 		});
@@ -71,13 +72,11 @@ function toggleStatus()
 	
 	else
 	{
-		//pageMod.destroy();
-		button.state("window",{
+		console.log('关闭监视...');
+		button.state("window",{checked:false,
 			"label":"监视已关闭",
 			"icon":"./tieba_disable.png"})
 	}
-
-	MonitorStatus = !MonitorStatus;
 }
 
 
@@ -87,10 +86,16 @@ function handleOpen(tab)
 {
 	console.log(tab.url);
 	//if(MonitorStatus)
-		
-	if(tab.url == "http://tieba.baidu.com/")
+		console.log('now MonitorStatus为'+MonitorStatus)
+	if(tab.url == "http://tieba.baidu.com/f?ie=utf-8&kw=c%E8%AF%AD%E8%A8%80")
 	{
-		tab.attach({contentScriptFile:[self.data.url('jquery.js'),self.data.url('monitor.js')]
-  });
+		console.log('working')
+		worker=tab.attach({contentScriptFile:[self.data.url('jquery.js'),self.data.url('monitor.js')]  });
+		worker.port.on("title", handleMessage);
 	}
+}
+
+function handleMessage(message)
+{
+	console.log("帖子标题："+message);
 }
