@@ -4,6 +4,9 @@ document.getElementById('switch').addEventListener('click',function(event){
 
 document.getElementById('setting').addEventListener('click',function(event){
 	self.port.emit('menuEvent', "setting");
+	alert(unsafeWindow.datas);
+	var t=unsafeWindow.foo;
+	t();
 }, false);
 
 document.getElementById('help').addEventListener('click',function(event){
