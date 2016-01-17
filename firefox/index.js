@@ -5,10 +5,12 @@ var panels = require("sdk/panel");
 
 tabs.on("ready",handleOpen);		//处理tab开启事件
 
+
+//设置监视状态
 var MonitorStatus = false;
 
 
-
+//菜单页面
 var menuPanel = panels.Panel({
 	contentScriptFile:"./menu.js",
   contentURL: self.data.url("menu.html"),
@@ -19,7 +21,7 @@ var menuPanel = panels.Panel({
 
 var button = buttons.ToggleButton({
 	id : "status-switch",
-	label:"监视已关闭",
+	label:"监视已关闭\n将不会监视新开启的页面",
 	icon:"./tieba_disable.png",
 	//onClick:handleClick,
 	onChange:handleChange
@@ -84,18 +86,29 @@ function toggleStatus()
 
 function handleOpen(tab)
 {
-	console.log(tab.url);
-	//if(MonitorStatus)
-		console.log('now MonitorStatus为'+MonitorStatus)
-	if(tab.url == "http://tieba.baidu.com/f?ie=utf-8&kw=c%E8%AF%AD%E8%A8%80")
+	console.log("tab打开了："+tab.url);
+	if(checkURL(tab.url) == true && MonitorStatus)
 	{
 		console.log('working')
 		worker=tab.attach({contentScriptFile:[self.data.url('jquery.js'),self.data.url('monitor.js')]  });
 		worker.port.on("title", handleMessage);
+		worker.port.on("login", handleLogin);
 	}
 }
 
 function handleMessage(message)
 {
 	console.log("帖子标题："+message);
+}
+
+function handleLogin(message)
+{
+	console.log(message);
+}
+
+
+function checkURL(url)
+{
+	var exp= new RegExp('http://tieba.baidu.com/f.*kw=c%E8%AF%AD%E8%A8%80.*');
+	return exp.test(url);
 }

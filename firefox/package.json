@@ -1,8 +1,8 @@
 {
   "title": "贴吧监视器",
   "name": "tieba",
-  "version": "0.0.1",
-  "description": "监视百度贴吧上的发帖，识别伸手党并删除帖子",
+  "version": "0.9.0",
+  "description": "监视百度贴吧上的发帖，识别并标记伸手贴，帮助吧务管理贴吧",
   "main": "index.js",
   "author": "yangwang",
   "engines": {
